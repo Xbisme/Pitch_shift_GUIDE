@@ -1,0 +1,29 @@
+function output_signal = pitch_resample(input,sr ,p, q)
+    speed_factor = 0.4;  % slow down
+    fft_size = 1024;
+
+    %% Change Speed
+    y = pvoc(input, speed_factor); % pvoc(input, factor)
+    len = max(length(y), length(input)); % longer signal
+    % Plot
+    figure
+    subplot(2,1,1); plot(input, 'r'); xlim([0, len]); title('Original')
+    subplot(2,1,2); plot(y, 'b'); xlim([0, len]); title('Stretched')
+
+    %% Change Pitch
+    % Demo is 5/4th which is major third ratio so let input be 440 (A note) then output
+    % is 550 (C# which is major third)
+
+    speed = pvoc(input, p/q); % 5/4 speed
+    output_signal = resample(speed, p, q); % resample(input, numerator, denominator), change pitch
+    len = max(length(speed), length(pitch)); % longer signal
+
+    % % Play
+     soundsc( output_signal, sr) % overlap original with pitch shifted
+
+    % Plot 
+    figure
+    subplot(3,1,1); plot(input, 'm'); xlim([0, len]); title('Original')
+    subplot(3,1,2); plot(speed, 'b'); xlim([0, len]); title('Time Shift')
+    subplot(3,1,3); plot(pitch, 'g'); xlim([0, len]); title('Pitch Shift (resampled)')
+end
