@@ -11,10 +11,7 @@ function output_signal = pitch_resample(input,sr ,p, q)
     subplot(2,1,2); plot(y, 'b'); xlim([0, len]); title('Stretched')
 
     %% Change Pitch
-    % Demo is 5/4th which is major third ratio so let input be 440 (A note) then output
-    % is 550 (C# which is major third)
-
-    speed = pvoc(input, p/q); % 5/4 speed
+    speed = pvoc(input, p/q);
     output_signal = resample(speed, p, q); % resample(input, numerator, denominator), change pitch
     len = max(length(speed), length(pitch)); % longer signal
 

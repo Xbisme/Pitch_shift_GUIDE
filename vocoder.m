@@ -92,9 +92,7 @@ pvcoSpeed = [];
 while(~flag)
     x = reader();
     % Change Pitch
-%     Demo is 5/4th which is major third ratio so let input be 440 (A note) then output
-%     is 550 (C# which is major third)
-    speed = pvoc(x, numerator/denominator,hop_size); % 5/4 speed
+    speed = pvoc(x, numerator/denominator,hop_size);
     pitch = resample(speed, numerator, denominator); % resample(input, numerator, denominator), change pitch
 %     len = max(length(speed), length(pitch)); % longer signal
     input = [input,x];
@@ -102,7 +100,7 @@ while(~flag)
     result = [result; pitch];
     writer(pitch);
 
-     pause(0.01); % D?ng 10 ms ð? x? l? các s? ki?n
+     pause(0.01); 
     if flag == true    
         release(reader);
         release(writer);
