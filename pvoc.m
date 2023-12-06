@@ -4,10 +4,10 @@ if nargin < 3
 end
 hop = n/4;
 
-%scf = 1.0;
-scf = r/n;
+scf = 1;
 % Calculate the basic STFT, magnitude scaled
-X = scf * stft(x', n, n, hop,44100);
+assignin('base','a',stft(x', n, n, hop,44100));
+X =  stft(x', n, n, hop,44100);
 
 % Calculate the new timebase samples
 [rows, cols] = size(X);
